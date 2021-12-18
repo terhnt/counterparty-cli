@@ -94,7 +94,7 @@ def initialize(testnet=False, testcoin=False, regtest=True, customnet="",
     config.COUNTERPARTY_RPC += '/rpc/'
 
     # BTC Wallet name
-    config.WALLET_NAME = wallet_name or 'bitcoincore'
+    config.WALLET_NAME = wallet_name or 'unobtanium'
 
     # BTC Wallet host
     config.WALLET_CONNECT = wallet_connect or 'localhost'
@@ -119,7 +119,7 @@ def initialize(testnet=False, testcoin=False, regtest=True, customnet="",
         raise ConfigurationError("Please specific a valid port number wallet-port configuration parameter")
 
     # BTC Wallet user
-    config.WALLET_USER = wallet_user or 'bitcoinrpc'
+    config.WALLET_USER = wallet_user or 'unobtaniumrpc'
 
     # BTC Wallet password
     if wallet_password:
