@@ -11,6 +11,6 @@ changes needed ( and probably more )
 [![License](https://pypip.in/license/counterparty-cli/badge.svg)](https://pypi.python.org/pypi/counterparty-cli/)
 [![Slack Status](http://slack.counterparty.io/badge.svg)](http://slack.counterparty.io)
 
-`counterparty-cli` is a command line interface for [`counterparty-lib`](https://github.com/CounterpartyXCP/counterparty-lib).
+`counterparty-cli` is a command line interface for [`unoparty-lib`](https://github.com/terhnt/unoparty-lib).
 
-For installation and configuration instructions, see the [`counterparty-lib README`](https://github.com/CounterpartyXCP/counterparty-lib), as well as the [Official Project Documentation](http://counterparty.io/docs/).
+For installation and configuration instructions, see the [`unoparty-lib README`](https://github.com/terhnt/unoparty-lib), as well as the [Official Project Documentation](http://counterparty.io/docs/).
