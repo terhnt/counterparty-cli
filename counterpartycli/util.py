@@ -118,7 +118,7 @@ def value_out(quantity, asset, divisible=None):
 def bootstrap(testnet=False, overwrite=True, ask_confirmation=False, quiet=False):
     data_dir = appdirs.user_data_dir(appauthor=config.XCP_NAME, appname=config.APP_NAME, roaming=True)
 
-    # Set Constants.
+    # Set Constants. - Needs changing here
     if testnet:
         if check.CONSENSUS_HASH_VERSION_TESTNET < 7:
             BOOTSTRAP_URL = 'https://counterparty.io/bootstrap/counterparty-db-testnet.latest.tar.gz'
