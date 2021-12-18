@@ -1,3 +1,11 @@
+Conversion to Unoparty-cli
+is work in progress
+
+changes needed ( and probably more )
+- renaming counterpartycli folder and all refernces to.
+- bootstrap links
+- references to bitcoincore might need adjusting
+
 [![Latest Version](https://pypip.in/version/counterparty-cli/badge.svg)](https://pypi.python.org/pypi/counterparty-cli/)
 [![Supported Python versions](https://pypip.in/py_versions/counterparty-cli/badge.svg)](https://pypi.python.org/pypi/counterparty-cli/)
 [![License](https://pypip.in/license/counterparty-cli/badge.svg)](https://pypi.python.org/pypi/counterparty-cli/)
