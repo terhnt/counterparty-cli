@@ -51,7 +51,7 @@ def generate_config_file(filename, config_args, known_config={}, overwrite=False
 def extract_old_config():
     old_config = {}
 
-    old_appdir = appdirs.user_config_dir(appauthor='Counterparty', appname='counterpartyd', roaming=True)
+    old_appdir = appdirs.user_config_dir(appauthor='Unoparty', appname='counterpartyd', roaming=True)
     old_configfile = os.path.join(old_appdir, 'counterpartyd.conf')
 
     if os.path.exists(old_configfile):
@@ -71,12 +71,12 @@ def extract_bitcoincore_config():
 
     # Figure out the path to the bitcoin.conf file
     if platform.system() == 'Darwin':
-        btc_conf_file = os.path.expanduser('~/Library/Application Support/Bitcoin/')
+        btc_conf_file = os.path.expanduser('~/Library/Application Support/Unobtanium/')
     elif platform.system() == 'Windows':
-        btc_conf_file = os.path.join(os.environ['APPDATA'], 'Bitcoin')
+        btc_conf_file = os.path.join(os.environ['APPDATA'], 'Unobtanium')
     else:
-        btc_conf_file = os.path.expanduser('~/.bitcoin')
-    btc_conf_file = os.path.join(btc_conf_file, 'bitcoin.conf')
+        btc_conf_file = os.path.expanduser('~/.unobtanium')
+    btc_conf_file = os.path.join(btc_conf_file, 'unobtanium.conf')
 
     # Extract contents of bitcoin.conf to build service_url
     if os.path.exists(btc_conf_file):
