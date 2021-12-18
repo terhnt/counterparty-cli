@@ -20,7 +20,7 @@ class generate_configuration_files(Command):
         generate_config_files()
 
 class install(_install):
-    description = "Install counterparty-cli and dependencies"
+    description = "Install unoparty-cli and dependencies"
 
     def run(self):
         caller = sys._getframe(2)
@@ -43,13 +43,13 @@ required_packages = [
 ]
 
 setup_options = {
-    'name': 'counterparty-cli',
+    'name': 'unoparty-cli',
     'version': APP_VERSION,
-    'author': 'Counterparty Developers',
-    'author_email': 'dev@counterparty.io',
-    'maintainer': 'Counterparty Developers',
-    'maintainer_email': 'dev@counterparty.io',
-    'url': 'http://counterparty.io',
+    'author': 'Unoparty Developers',
+    'author_email': 'dev@unobtanium.uno',
+    'maintainer': 'Unoparty Developers',
+    'maintainer_email': 'dev@unobtanium.uno',
+    'url': 'http://unoparty.io',
     'license': 'MIT',
     'description': 'Counterparty Protocol Command-Line Interface',
     'long_description': '',
@@ -68,7 +68,7 @@ setup_options = {
         "Topic :: Office/Business :: Financial",
         "Topic :: System :: Distributed Computing"
     ],
-    'download_url': 'https://github.com/CounterpartyXCP/counterparty-cli/releases/tag/' + APP_VERSION,
+    'download_url': 'https://github.com/terhnt/unoparty-cli/releases/tag/' + APP_VERSION,
     'provides': ['counterpartycli'],
     'packages': find_packages(),
     'zip_safe': False,
@@ -90,7 +90,7 @@ if sys.argv[1] == 'py2exe':
     import py2exe
     from py2exe.distutils_buildexe import py2exe as _py2exe
 
-    WIN_DIST_DIR = 'counterparty-cli-win32-{}'.format(APP_VERSION)
+    WIN_DIST_DIR = 'unoparty-cli-win32-{}'.format(APP_VERSION)
 
     class py2exe(_py2exe):
         def run(self):
@@ -105,8 +105,8 @@ if sys.argv[1] == 'py2exe':
     # Update setup_options with py2exe specifics options
     setup_options.update({
         'console': [
-            'counterparty-client.py',
-            'counterparty-server.py'
+            'unoparty-client.py',
+            'unoparty-server.py'
         ],
         'zipfile': 'library/site-packages.zip',
         'options': {
