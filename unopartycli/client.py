@@ -7,16 +7,16 @@ import logging
 import getpass
 from decimal import Decimal as D
 
-from counterpartylib.lib import log
+from unopartylib.lib import log
 logger = logging.getLogger(__name__)
 
-from counterpartylib.lib import config, script
-from counterpartylib.lib.util import make_id, BET_TYPE_NAME
-from counterpartylib.lib.log import isodt
-from counterpartylib.lib.exceptions import TransactionError
-from counterpartycli.util import add_config_arguments
-from counterpartycli.setup import generate_config_files
-from counterpartycli import APP_VERSION, util, messages, wallet, console, clientapi
+from unopartylib.lib import config, script
+from unopartylib.lib.util import make_id, BET_TYPE_NAME
+from unopartylib.lib.log import isodt
+from unopartylib.lib.exceptions import TransactionError
+from unopartycli.util import add_config_arguments
+from unopartycli.setup import generate_config_files
+from unopartycli import APP_VERSION, util, messages, wallet, console, clientapi
 
 APP_NAME = 'counterparty-client'
 
@@ -57,7 +57,7 @@ CONFIG_ARGS = [
 
 def main():
     if os.name == 'nt':
-        from counterpartylib.lib import util_windows
+        from unopartylib.lib import util_windows
         #patch up cmd.exe's "challenged" (i.e. broken/non-existent) UTF-8 logging
         util_windows.fix_win32_unicode()
 

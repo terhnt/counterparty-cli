@@ -8,9 +8,9 @@ import json
 import time
 from decimal import Decimal as D
 
-from counterpartycli.wallet import bitcoincore, btcwallet
-from counterpartylib.lib import config, util, exceptions, script
-from counterpartycli.util import api, value_out
+from unopartycli.wallet import bitcoincore, btcwallet
+from unopartylib.lib import config, util, exceptions, script
+from unopartycli.util import api, value_out
 
 from pycoin.tx import Tx, SIGHASH_ALL
 from pycoin.encoding import wif_to_tuple_of_secret_exponent_compressed, public_pair_to_hash160_sec
@@ -23,7 +23,7 @@ class LockedWalletError(WalletError):
     pass
 
 def WALLET():
-    return sys.modules['counterpartycli.wallet.{}'.format(config.WALLET_NAME)] 
+    return sys.modules['unopartycli.wallet.{}'.format(config.WALLET_NAME)] 
 
 def get_wallet_addresses():
     return WALLET().get_wallet_addresses()

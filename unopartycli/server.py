@@ -6,14 +6,14 @@ import argparse
 import logging
 logger = logging.getLogger()
 
-from counterpartylib.lib import log
+from unopartylib.lib import log
 log.set_logger(logger)
 
-from counterpartylib import server
-from counterpartylib.lib import config
-from counterpartycli.util import add_config_arguments, bootstrap
-from counterpartycli.setup import generate_config_files
-from counterpartycli import APP_VERSION
+from unopartylib import server
+from unopartylib.lib import config
+from unopartycli.util import add_config_arguments, bootstrap
+from unopartycli.setup import generate_config_files
+from unopartycli import APP_VERSION
 
 APP_NAME = 'counterparty-server'
 
