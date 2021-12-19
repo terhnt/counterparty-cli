@@ -3,11 +3,11 @@ import logging
 import binascii
 from urllib.parse import quote_plus as urlencode
 
-from counterpartylib.lib import config, script
-from counterpartycli import util
-from counterpartycli import wallet
-from counterpartycli import messages
-from counterpartycli.messages import get_pubkeys
+from unopartylib.lib import config, script
+from unopartycli import util
+from unopartycli import wallet
+from unopartycli import messages
+from unopartycli.messages import get_pubkeys
 
 logger = logging.getLogger()
 
@@ -225,7 +225,7 @@ def call(method, args, pubkey_resolver=None):
 
         :Example:
 
-        import counterpartycli.clientapi
+        import unopartycli.clientapi
         clientapi.initialize(...)
         unsigned_hex = clientapi.call('create_send', {...})
         signed_hex =  clientapi.call('sign_raw_transaction', unsigned_hex)

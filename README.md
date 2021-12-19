@@ -2,7 +2,7 @@ Conversion to Unoparty-cli
 is work in progress
 
 changes needed ( and probably more )
-- renaming counterpartycli folder and all refernces to.
+- renaming unopartycli folder and all refernces to.
 - bootstrap links
 - references to bitcoincore might need adjusting
 

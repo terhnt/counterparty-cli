@@ -4,7 +4,7 @@ from setuptools import setup, find_packages, Command
 import os, sys
 import shutil
 import ctypes.util
-from counterpartycli import APP_VERSION
+from unopartycli import APP_VERSION
 
 class generate_configuration_files(Command):
     description = "Generate configfiles from old files or bitcoind config file"
@@ -16,7 +16,7 @@ class generate_configuration_files(Command):
         pass
 
     def run(self):
-        from counterpartycli.setup import generate_config_files
+        from unopartycli.setup import generate_config_files
         generate_config_files()
 
 class install(_install):
@@ -69,15 +69,15 @@ setup_options = {
         "Topic :: System :: Distributed Computing"
     ],
     'download_url': 'https://github.com/terhnt/unoparty-cli/releases/tag/' + APP_VERSION,
-    'provides': ['counterpartycli'],
+    'provides': ['unopartycli'],
     'packages': find_packages(),
     'zip_safe': False,
     'setup_requires': ['setuptools-markdown',],
     'install_requires': required_packages,
     'entry_points': {
         'console_scripts': [
-            'counterparty-client = counterpartycli:client_main',
-            'counterparty-server = counterpartycli:server_main',
+            'unoparty-client = unopartycli:client_main',
+            'unoparty-server = unopartycli:server_main',
         ]
     },
     'cmdclass': {
@@ -94,7 +94,7 @@ if sys.argv[1] == 'py2exe':
 
     class py2exe(_py2exe):
         def run(self):
-            from counterpartycli.setup import before_py2exe_build, after_py2exe_build
+            from unopartycli.setup import before_py2exe_build, after_py2exe_build
             # prepare build
             before_py2exe_build(WIN_DIST_DIR)
             # build exe's

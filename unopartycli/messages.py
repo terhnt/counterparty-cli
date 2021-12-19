@@ -6,11 +6,11 @@ import time
 import calendar
 import dateutil.parser
 
-from counterpartylib.lib import script, config, blocks, exceptions, api, transaction
-from counterpartylib.lib.util import make_id, BET_TYPE_NAME, BET_TYPE_ID, dhash, generate_asset_name
-from counterpartylib.lib.kickstart.utils import ib2h
-from counterpartycli import util
-from counterpartycli import wallet
+from unopartylib.lib import script, config, blocks, exceptions, api, transaction
+from unopartylib.lib.util import make_id, BET_TYPE_NAME, BET_TYPE_ID, dhash, generate_asset_name
+from unopartylib.lib.kickstart.utils import ib2h
+from unopartycli import util
+from unopartycli import wallet
 
 import bitcoin as bitcoinlib
 

@@ -3,7 +3,7 @@
 - Quality Assurance
 - Update `CHANGELOG.md`
 - Update `APP_VERSION` in `counterpartycli/__init__.py`
-- Update `counterpartylib` version in `setup.py` (if necessary)
+- Update `unopartylib` version in `setup.py` (if necessary)
 - Merge develop into Master
 - Build binaries:
     * In a new VM install Windows dependencies (http://counterparty.io/docs/windows/)
