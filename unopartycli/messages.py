@@ -200,8 +200,8 @@ def prepare_args(args, action):
 
     # execute
     if action == 'execute':
-        args.value = util.value_in(args.value, 'XCP')
-        args.startgas = util.value_in(args.startgas, 'XCP')
+        args.value = util.value_in(args.value, config.XCP)
+        args.startgas = util.value_in(args.startgas, config.XCP)
 
     # destroy
     if action == 'destroy':
@@ -215,7 +215,7 @@ def prepare_args(args, action):
             move_random_hash_bin = dhash(random_bin + move)
             return binascii.hexlify(random_bin).decode('utf8'), binascii.hexlify(move_random_hash_bin).decode('utf8')
 
-        args.wager = util.value_in(args.wager, 'XCP')
+        args.wager = util.value_in(args.wager, config.XCP)
         random, move_random_hash = generate_move_random_hash(args.move)
         setattr(args, 'move_random_hash', move_random_hash)
         print('random: {}'.format(random))
