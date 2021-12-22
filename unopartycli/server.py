@@ -15,7 +15,7 @@ from unopartycli.util import add_config_arguments, bootstrap
 from unopartycli.setup import generate_config_files
 from unopartycli import APP_VERSION
 
-APP_NAME = 'counterparty-server'
+APP_NAME = 'unoparty-server'
 
 CONFIG_ARGS = [
     [('-v', '--verbose'), {'dest': 'verbose', 'action': 'store_true', 'default': False, 'help': 'sets log level to DEBUG instead of WARNING'}],
@@ -27,7 +27,7 @@ CONFIG_ARGS = [
     [('--backend-name',), {'default': 'addrindex', 'help': 'the backend name to connect to'}],
     [('--backend-connect',), {'default': 'localhost', 'help': 'the hostname or IP of the backend server'}],
     [('--backend-port',), {'type': int, 'help': 'the backend port to connect to'}],
-    [('--backend-user',), {'default': 'bitcoinrpc', 'help': 'the username used to communicate with backend'}],
+    [('--backend-user',), {'default': 'unobtaniumrpc', 'help': 'the username used to communicate with backend'}],
     [('--backend-password',), {'help': 'the password used to communicate with backend'}],
     [('--backend-ssl',), {'action': 'store_true', 'default': False, 'help': 'use SSL to connect to backend (default: false)'}],
     [('--backend-ssl-no-verify',), {'action': 'store_true', 'default': False, 'help': 'verify SSL certificate of backend; disallow use of self‐signed certificates (default: true)'}],
@@ -59,7 +59,7 @@ class VersionError(Exception):
     pass
 def main():
     if os.name == 'nt':
-        from counterpartylib.lib import util_windows
+        from unopartylib.lib import util_windows
         #patch up cmd.exe's "challenged" (i.e. broken/non-existent) UTF-8 logging
         util_windows.fix_win32_unicode()
 
@@ -85,8 +85,8 @@ def main():
     parser_rollback = subparsers.add_parser('rollback', help='rollback database')
     parser_rollback.add_argument('block_index', type=int, help='the index of the last known good block')
 
-    parser_kickstart = subparsers.add_parser('kickstart', help='rapidly build database by reading from Bitcoin Core blockchain')
-    parser_kickstart.add_argument('--bitcoind-dir', help='Bitcoin Core data directory')
+    parser_kickstart = subparsers.add_parser('kickstart', help='rapidly build database by reading from Unobtanium Core blockchain')
+    parser_kickstart.add_argument('--bitcoind-dir', help='Unobtanium Core data directory')
 
     parser_bootstrap = subparsers.add_parser('bootstrap', help='bootstrap database with hosted snapshot')
     parser_bootstrap.add_argument('-q', '--quiet', dest='quiet', action='store_true', help='suppress progress bar')
@@ -94,7 +94,7 @@ def main():
 
     args = parser.parse_args()
 
-    log.set_up(log.ROOT_LOGGER, verbose=args.verbose, console_logfilter=os.environ.get('COUNTERPARTY_LOGGING', None))
+    log.set_up(log.ROOT_LOGGER, verbose=args.verbose, console_logfilter=os.environ.get('UNOPARTY_LOGGING', None))
 
     logger.info('Running v{} of {}.'.format(APP_VERSION, APP_NAME))
 
@@ -140,7 +140,7 @@ def main():
                                 requests_timeout=args.requests_timeout,
                                 rpc_batch_size=args.rpc_batch_size,
                                 check_asset_conservation=not args.no_check_asset_conservation,
-                                force=args.force, verbose=args.verbose, console_logfilter=os.environ.get('COUNTERPARTY_LOGGING', None),
+                                force=args.force, verbose=args.verbose, console_logfilter=os.environ.get('UNOPARTY_LOGGING', None),
                                 p2sh_dust_return_pubkey=args.p2sh_dust_return_pubkey,
                                 utxo_locks_max_addresses=args.utxo_locks_max_addresses,
                                 utxo_locks_max_age=args.utxo_locks_max_age)

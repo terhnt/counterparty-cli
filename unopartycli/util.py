@@ -89,7 +89,7 @@ def rpc(url, method, params=None, ssl_verify=False, tries=1):
         raise RPCError('{}'.format(response_json['error']))
 
 def api(method, params=None):
-    return rpc(config.COUNTERPARTY_RPC, method, params=params, ssl_verify=config.COUNTERPARTY_RPC_SSL_VERIFY)
+    return rpc(config.UNOPARTY_RPC, method, params=params, ssl_verify=config.UNOPARTY_RPC_SSL_VERIFY)
 
 def wallet_api(method, params=None):
     return rpc(config.WALLET_URL, method, params=params, ssl_verify=config.WALLET_SSL_VERIFY)
@@ -121,17 +121,17 @@ def bootstrap(testnet=False, overwrite=True, ask_confirmation=False, quiet=False
     # Set Constants. - Needs changing here
     if testnet:
         if check.CONSENSUS_HASH_VERSION_TESTNET < 7:
-            BOOTSTRAP_URL = 'https://counterparty.io/bootstrap/counterparty-db-testnet.latest.tar.gz'
+            BOOTSTRAP_URL = 'https://unoparty.io/bootstrap/unoparty-db-testnet.latest.tar.gz'
         else:
-            BOOTSTRAP_URL = 'https://counterparty.io/bootstrap/counterparty-db-testnet-{}.latest.tar.gz'.format(check.CONSENSUS_HASH_VERSION_TESTNET)
-        TARBALL_PATH = os.path.join(tempfile.gettempdir(), 'counterpartyd-testnet-db.latest.tar.gz')
+            BOOTSTRAP_URL = 'https://unoparty.io/bootstrap/unoparty-db-testnet-{}.latest.tar.gz'.format(check.CONSENSUS_HASH_VERSION_TESTNET)
+        TARBALL_PATH = os.path.join(tempfile.gettempdir(), 'unopartyd-testnet-db.latest.tar.gz')
         DATABASE_PATH = os.path.join(data_dir, '{}.testnet.db'.format(config.APP_NAME))
     else:
         if check.CONSENSUS_HASH_VERSION_MAINNET < 3:
-            BOOTSTRAP_URL = 'https://counterparty.io/bootstrap/counterparty-db.latest.tar.gz'
+            BOOTSTRAP_URL = 'https://unoparty.io/bootstrap/unoparty-db.latest.tar.gz'
         else:
-            BOOTSTRAP_URL = 'https://counterparty.io/bootstrap/counterparty-db-{}.latest.tar.gz'.format(check.CONSENSUS_HASH_VERSION_MAINNET)
-        TARBALL_PATH = os.path.join(tempfile.gettempdir(), 'counterpartyd-db.latest.tar.gz')
+            BOOTSTRAP_URL = 'https://unoparty.io/bootstrap/unoparty-db-{}.latest.tar.gz'.format(check.CONSENSUS_HASH_VERSION_MAINNET)
+        TARBALL_PATH = os.path.join(tempfile.gettempdir(), 'unopartyd-db.latest.tar.gz')
         DATABASE_PATH = os.path.join(data_dir, '{}.db'.format(config.APP_NAME))
 
     # Prepare Directory.

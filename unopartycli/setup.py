@@ -51,8 +51,8 @@ def generate_config_file(filename, config_args, known_config={}, overwrite=False
 def extract_old_config():
     old_config = {}
 
-    old_appdir = appdirs.user_config_dir(appauthor='Unoparty', appname='counterpartyd', roaming=True)
-    old_configfile = os.path.join(old_appdir, 'counterpartyd.conf')
+    old_appdir = appdirs.user_config_dir(appauthor='Unoparty', appname='unopartyd', roaming=True)
+    old_configfile = os.path.join(old_appdir, 'unopartyd.conf')
 
     if os.path.exists(old_configfile):
         configfile = configparser.SafeConfigParser(allow_no_value=True, inline_comment_prefixes=('#', ';'))
@@ -69,7 +69,7 @@ def extract_old_config():
 def extract_bitcoincore_config():
     bitcoincore_config = {}
 
-    # Figure out the path to the bitcoin.conf file
+    # Figure out the path to the unobtanium.conf file
     if platform.system() == 'Darwin':
         btc_conf_file = os.path.expanduser('~/Library/Application Support/Unobtanium/')
     elif platform.system() == 'Windows':
@@ -78,11 +78,11 @@ def extract_bitcoincore_config():
         btc_conf_file = os.path.expanduser('~/.unobtanium')
     btc_conf_file = os.path.join(btc_conf_file, 'unobtanium.conf')
 
-    # Extract contents of bitcoin.conf to build service_url
+    # Extract contents of unobtanium.conf to build service_url
     if os.path.exists(btc_conf_file):
         conf = {}
         with open(btc_conf_file, 'r') as fd:
-            # Bitcoin Core accepts empty rpcuser, not specified in btc_conf_file
+            # Unobtanium Core accepts empty rpcuser, not specified in btc_conf_file
             for line in fd.readlines():
                 if '#' in line or '=' not in line:
                     continue
@@ -98,8 +98,8 @@ def extract_bitcoincore_config():
 
             for bitcoind_key in config_keys:
                 if bitcoind_key in conf:
-                    counterparty_key = config_keys[bitcoind_key]
-                    bitcoincore_config[counterparty_key] = conf[bitcoind_key]
+                    unoparty_key = config_keys[bitcoind_key]
+                    bitcoincore_config[unoparty_key] = conf[bitcoind_key]
 
     return bitcoincore_config
 
@@ -125,10 +125,10 @@ def server_to_client_config(server_config):
         'backend-password': 'wallet-password',
         'backend-ssl': 'wallet-ssl',
         'backend-ssl-verify': 'wallet-ssl-verify',
-        'rpc-host': 'counterparty-rpc-connect',
-        'rpc-port': 'counterparty-rpc-port',
-        'rpc-user': 'counterparty-rpc-user',
-        'rpc-password': 'counterparty-rpc-password'
+        'rpc-host': 'unoparty-rpc-connect',
+        'rpc-port': 'unoparty-rpc-port',
+        'rpc-user': 'unoparty-rpc-user',
+        'rpc-password': 'unoparty-rpc-password'
     }
 
     for server_key in config_keys:
@@ -169,8 +169,8 @@ def before_py2exe_build(win_dist_dir):
         shutil.rmtree(win_dist_dir)
     # py2exe don't manages entry_points
     for exe_name in ['client', 'server']:
-        shutil.copy('unopartycli/__init__.py', 'counterparty-{}.py'.format(exe_name))
-        with open('counterparty-{}.py'.format(exe_name), 'a') as fp:
+        shutil.copy('unopartycli/__init__.py', 'unoparty-{}.py'.format(exe_name))
+        with open('unoparty-{}.py'.format(exe_name), 'a') as fp:
             fp.write('{}_main()'.format(exe_name))
     # Hack
     src = 'C:\\Python34\\Lib\\site-packages\\flask_httpauth.py'
@@ -180,7 +180,7 @@ def before_py2exe_build(win_dist_dir):
 def after_py2exe_build(win_dist_dir):
     # clean temporaries scripts
     for exe_name in ['client', 'server']:
-        os.remove('counterparty-{}.py'.format(exe_name))
+        os.remove('unoparty-{}.py'.format(exe_name))
     # py2exe copies only pyc files in site-packages.zip
     # modules with no pyc files must be copied in 'dist/library/'
     import unopartylib, certifi
@@ -201,9 +201,9 @@ def after_py2exe_build(win_dist_dir):
     zip_path = '{}.zip'.format(win_dist_dir)
     zip_folder(win_dist_dir, zip_path)
 
-    # Open,close, read file and calculate MD5 on its contents 
+    # Open,close, read file and calculate MD5 on its contents
     with open(zip_path, 'rb') as zip_file:
-        data = zip_file.read()    
+        data = zip_file.read()
         md5 = hashlib.md5(data).hexdigest()
 
     # include MD5 in the zip name
@@ -220,7 +220,7 @@ def after_py2exe_build(win_dist_dir):
 # Download bootstrap database
 def bootstrap(overwrite=True, ask_confirmation=False):
     if ask_confirmation:
-        question = 'Would you like to bootstrap your local Counterparty database from `https://s3.amazonaws.com/counterparty-bootstrap/`? (y/N): '
+        question = 'Would you like to bootstrap your local Unoparty database from `https://s3.amazonaws.com/unoparty-bootstrap/`? (y/N): '
         if input(question).lower() != 'y':
             return
     util.bootstrap(testnet=False)

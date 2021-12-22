@@ -51,9 +51,9 @@ setup_options = {
     'maintainer_email': 'dev@unobtanium.uno',
     'url': 'http://unoparty.io',
     'license': 'MIT',
-    'description': 'Counterparty Protocol Command-Line Interface',
+    'description': 'Unoparty Protocol Command-Line Interface',
     'long_description': '',
-    'keywords': 'counterparty,bitcoin',
+    'keywords': 'unoparty,unobtanium',
     'classifiers': [
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",

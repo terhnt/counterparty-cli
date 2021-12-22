@@ -17,9 +17,9 @@ class ConfigurationError(Exception):
     pass
 
 def initialize(testnet=False, testcoin=False, regtest=True, customnet="",
-                counterparty_rpc_connect=None, counterparty_rpc_port=None,
-                counterparty_rpc_user=None, counterparty_rpc_password=None,
-                counterparty_rpc_ssl=False, counterparty_rpc_ssl_verify=False,
+                unoparty_rpc_connect=None, unoparty_rpc_port=None,
+                unoparty_rpc_user=None, unoparty_rpc_password=None,
+                unoparty_rpc_ssl=False, unoparty_rpc_ssl_verify=False,
                 wallet_name=None, wallet_connect=None, wallet_port=None,
                 wallet_user=None, wallet_password=None,
                 wallet_ssl=False, wallet_ssl_verify=False,
@@ -46,60 +46,60 @@ def initialize(testnet=False, testcoin=False, regtest=True, customnet="",
     ##############
     # THINGS WE CONNECT TO
 
-    # Server host (Bitcoin Core)
-    config.COUNTERPARTY_RPC_CONNECT = counterparty_rpc_connect or 'localhost'
+    # Server host (Unobtanium Core)
+    config.UNOPARTY_RPC_CONNECT = unoparty_rpc_connect or 'localhost'
 
-    # Server RPC port (Bitcoin Core)
-    if counterparty_rpc_port:
-        config.COUNTERPARTY_RPC_PORT = counterparty_rpc_port
+    # Server RPC port (Unobtanium Core)
+    if unoparty_rpc_port:
+        config.UNOPARTY_RPC_PORT = unoparty_rpc_port
     else:
         if config.TESTNET:
-            config.COUNTERPARTY_RPC_PORT = config.DEFAULT_RPC_PORT_TESTNET
+            config.UNOPARTY_RPC_PORT = config.DEFAULT_RPC_PORT_TESTNET
         elif config.CUSTOMNET:
-            config.COUNTERPARTY_RPC_PORT = config.DEFAULT_RPC_PORT_REGTEST
+            config.UNOPARTY_RPC_PORT = config.DEFAULT_RPC_PORT_REGTEST
         elif config.REGTEST:
-            config.COUNTERPARTY_RPC_PORT = config.DEFAULT_RPC_PORT_REGTEST
+            config.UNOPARTY_RPC_PORT = config.DEFAULT_RPC_PORT_REGTEST
         else:
-            config.COUNTERPARTY_RPC_PORT = config.DEFAULT_RPC_PORT
+            config.UNOPARTY_RPC_PORT = config.DEFAULT_RPC_PORT
     try:
-        config.COUNTERPARTY_RPC_PORT = int(config.COUNTERPARTY_RPC_PORT)
-        if not (int(config.COUNTERPARTY_RPC_PORT) > 1 and int(config.COUNTERPARTY_RPC_PORT) < 65535):
+        config.UNOPARTY_RPC_PORT = int(config.UNOPARTY_RPC_PORT)
+        if not (int(config.UNOPARTY_RPC_PORT) > 1 and int(config.UNOPARTY_RPC_PORT) < 65535):
             raise ConfigurationError('invalid RPC port number')
     except:
-        raise Exception("Please specific a valid port number counterparty-rpc-port configuration parameter")
+        raise Exception("Please specific a valid port number unoparty-rpc-port configuration parameter")
 
-    # Server RPC user (Bitcoin Core)
-    config.COUNTERPARTY_RPC_USER = counterparty_rpc_user or 'rpc'
+    # Server RPC user (Unobtanium Core)
+    config.UNOPARTY_RPC_USER = unoparty_rpc_user or 'rpc'
 
-    # Server RPC password (Bitcoin Core)
-    if counterparty_rpc_password:
-        config.COUNTERPARTY_RPC_PASSWORD = counterparty_rpc_password
+    # Server RPC password (Unobtanium Core)
+    if unoparty_rpc_password:
+        config.UNOPARTY_RPC_PASSWORD = unoparty_rpc_password
     else:
-        config.COUNTERPARTY_RPC_PASSWORD = None
+        config.UNOPARTY_RPC_PASSWORD = None
 
     # Server RPC SSL
-    config.COUNTERPARTY_RPC_SSL = counterparty_rpc_ssl or False  # Default to off.
+    config.UNOPARTY_RPC_SSL = unoparty_rpc_ssl or False  # Default to off.
 
     # Server RPC SSL Verify
-    config.COUNTERPARTY_RPC_SSL_VERIFY = counterparty_rpc_ssl_verify or False # Default to off (support self‐signed certificates)
+    config.UNOPARTY_RPC_SSL_VERIFY = unoparty_rpc_ssl_verify or False # Default to off (support self‐signed certificates)
 
     # Construct server URL.
-    config.COUNTERPARTY_RPC = config.COUNTERPARTY_RPC_CONNECT + ':' + str(config.COUNTERPARTY_RPC_PORT)
-    if config.COUNTERPARTY_RPC_PASSWORD:
-        config.COUNTERPARTY_RPC = urlencode(config.COUNTERPARTY_RPC_USER) + ':' + urlencode(config.COUNTERPARTY_RPC_PASSWORD) + '@' + config.COUNTERPARTY_RPC
-    if config.COUNTERPARTY_RPC_SSL:
-        config.COUNTERPARTY_RPC = 'https://' + config.COUNTERPARTY_RPC
+    config.UNOPARTY_RPC = config.UNOPARTY_RPC_CONNECT + ':' + str(config.UNOPARTY_RPC_PORT)
+    if config.UNOPARTY_RPC_PASSWORD:
+        config.UNOPARTY_RPC = urlencode(config.UNOPARTY_RPC_USER) + ':' + urlencode(config.UNOPARTY_RPC_PASSWORD) + '@' + config.UNOPARTY_RPC
+    if config.UNOPARTY_RPC_SSL:
+        config.UNOPARTY_RPC = 'https://' + config.UNOPARTY_RPC
     else:
-        config.COUNTERPARTY_RPC = 'http://' + config.COUNTERPARTY_RPC
-    config.COUNTERPARTY_RPC += '/rpc/'
+        config.UNOPARTY_RPC = 'http://' + config.UNOPARTY_RPC
+    config.UNOPARTY_RPC += '/rpc/'
 
-    # BTC Wallet name
+    # UNO Wallet name
     config.WALLET_NAME = wallet_name or 'unobtanium'
 
-    # BTC Wallet host
+    # UNO Wallet host
     config.WALLET_CONNECT = wallet_connect or 'localhost'
 
-    # BTC Wallet port
+    # UNO Wallet port
     if wallet_port:
         config.WALLET_PORT = wallet_port
     else:
@@ -118,22 +118,22 @@ def initialize(testnet=False, testcoin=False, regtest=True, customnet="",
     except:
         raise ConfigurationError("Please specific a valid port number wallet-port configuration parameter")
 
-    # BTC Wallet user
+    # UNO Wallet user
     config.WALLET_USER = wallet_user or 'unobtaniumrpc'
 
-    # BTC Wallet password
+    # UNO Wallet password
     if wallet_password:
         config.WALLET_PASSWORD = wallet_password
     else:
         raise ConfigurationError('wallet RPC password not set. (Use configuration file or --wallet-password=PASSWORD)')
 
-    # BTC Wallet SSL
+    # UNO Wallet SSL
     config.WALLET_SSL = wallet_ssl or False  # Default to off.
 
-    # BTC Wallet SSL Verify
+    # UNO Wallet SSL Verify
     config.WALLET_SSL_VERIFY = wallet_ssl_verify or False # Default to off (support self‐signed certificates)
 
-    # Construct BTC wallet URL.
+    # Construct UNO wallet URL.
     config.WALLET_URL = urlencode(config.WALLET_USER) + ':' + urlencode(config.WALLET_PASSWORD) + '@' + config.WALLET_CONNECT + ':' + str(config.WALLET_PORT)
     if config.WALLET_SSL:
         config.WALLET_URL = 'https://' + config.WALLET_URL
@@ -221,7 +221,7 @@ WALLET_METHODS = [
 def call(method, args, pubkey_resolver=None):
     """
         Unified function to call Wallet and Server API methods
-        Should be used by applications like `counterparty-gui`
+        Should be used by applications like `unoparty-gui`
 
         :Example:
 
