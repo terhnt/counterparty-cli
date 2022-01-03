@@ -63,7 +63,7 @@ def initialize(testnet=False, testcoin=False, regtest=True, customnet="",
             config.UNOPARTY_RPC_PORT = config.DEFAULT_RPC_PORT
     try:
         config.UNOPARTY_RPC_PORT = int(config.UNOPARTY_RPC_PORT)
-        if not (int(config.UNOPARTY_RPC_PORT) > 1 and int(config.UNOPARTY_RPC_PORT) < 65535):
+        if not (int(config.UNOPARTY_RPC_PORT) > 1 and int(config.UNOPARTY_RPC_PORT) <= 65535):
             raise ConfigurationError('invalid RPC port number')
     except:
         raise Exception("Please specific a valid port number unoparty-rpc-port configuration parameter")
@@ -113,7 +113,7 @@ def initialize(testnet=False, testcoin=False, regtest=True, customnet="",
             config.WALLET_PORT = config.DEFAULT_BACKEND_PORT
     try:
         config.WALLET_PORT = int(config.WALLET_PORT)
-        if not (int(config.WALLET_PORT) > 1 and int(config.WALLET_PORT) < 65535):
+        if not (int(config.WALLET_PORT) > 1 and int(config.WALLET_PORT) <= 65535):
             raise ConfigurationError('invalid wallet API port number')
     except:
         raise ConfigurationError("Please specific a valid port number wallet-port configuration parameter")
