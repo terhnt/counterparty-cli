@@ -8,7 +8,7 @@ import json
 import time
 from decimal import Decimal as D
 
-from unopartycli.wallet import bitcoincore, btcwallet
+from unopartycli.wallet import unobtaniumcore, btcwallet
 from unopartylib.lib import config, util, exceptions, script
 from unopartycli.util import api, value_out
 

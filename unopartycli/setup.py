@@ -66,8 +66,8 @@ def extract_old_config():
 
     return old_config
 
-def extract_bitcoincore_config():
-    bitcoincore_config = {}
+def extract_unobtaniumcore_config():
+    unobtaniumcore_config = {}
 
     # Figure out the path to the unobtanium.conf file
     if platform.system() == 'Darwin':
@@ -96,18 +96,18 @@ def extract_bitcoincore_config():
                 'rpcssl': 'backend-ssl'
             }
 
-            for bitcoind_key in config_keys:
-                if bitcoind_key in conf:
-                    unoparty_key = config_keys[bitcoind_key]
-                    bitcoincore_config[unoparty_key] = conf[bitcoind_key]
+            for unobtaniumd_key in config_keys:
+                if unobtaniumd_key in conf:
+                    unoparty_key = config_keys[unobtaniumd_key]
+                    unobtaniumcore_config[unoparty_key] = conf[unobtaniumd_key]
 
-    return bitcoincore_config
+    return unobtaniumcore_config
 
 def get_server_known_config():
     server_known_config = {}
 
-    bitcoincore_config = extract_bitcoincore_config()
-    server_known_config.update(bitcoincore_config)
+    unobtaniumcore_config = extract_unobtaniumcore_config()
+    server_known_config.update(unobtaniumcore_config)
 
     old_config = extract_old_config()
     server_known_config.update(old_config)

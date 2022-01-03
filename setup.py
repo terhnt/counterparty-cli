@@ -7,7 +7,7 @@ import ctypes.util
 from unopartycli import APP_VERSION
 
 class generate_configuration_files(Command):
-    description = "Generate configfiles from old files or bitcoind config file"
+    description = "Generate configfiles from old files or unobtaniumd config file"
     user_options = []
 
     def initialize_options(self):
