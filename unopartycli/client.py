@@ -131,7 +131,8 @@ def main():
     parser_issuance.add_argument('--backing', default=0, help='how much of backing_asset each asset is backed by')
 
     parser_melt = subparsers.add_parser('melt', help='melt(burn) an existing asset to retreive the asset stored within')
-    parser_issuance.add_argument('--asset', required=True, help='the name of the asset to be melted (if it’s available)')
+    parser_melt.add_argument('--source', required=True, help='the source address)')
+    parser_melt.add_argument('--asset', required=True, help='the name of the asset to be melted (if it’s available)')
     parser_melt.add_argument('--quantity', default=0, help='the quantity of ASSET to be melted(burned)')
     parser_melt.add_argument('--fee', help='the exact {} fee to be paid to miners'.format(config.BTC))
 
