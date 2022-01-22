@@ -54,6 +54,9 @@ def print_asset(asset):
     table.add_row(['Asset Name:', asset['asset']])
     table.add_row(['Asset ID:', asset['asset_id']])
     table.add_row(['Divisible:', asset['divisible']])
+    table.add_row(['Meltable:', asset['meltable']])
+    table.add_row(['Backing_asset:', asset['backing_asset']])
+    table.add_row(['Backing:', asset['backing']])
     table.add_row(['Locked:', asset['locked']])
     table.add_row(['Supply:', asset['supply']])
     table.add_row(['Issuer:', asset['issuer']])
@@ -82,7 +85,7 @@ def print_asset(asset):
     print(os.linesep.join(lines))
 
 def print_wallet(wallet):
-    lines = [] 
+    lines = []
     for address in wallet['addresses']:
         table = PrettyTable(['Asset', 'Balance'])
         for asset in wallet['addresses'][address]:

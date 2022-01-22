@@ -126,6 +126,14 @@ def main():
     parser_issuance.add_argument('--divisible', action='store_true', help='whether or not the asset is divisible (must agree with previous issuances)')
     parser_issuance.add_argument('--description', type=str, required=True, help='a description of the asset (set to ‘LOCK’ to lock against further issuances with non‐zero quantitys)')
     parser_issuance.add_argument('--fee', help='the exact {} fee to be paid to miners'.format(config.BTC))
+    parser_issuance.add_argument('--meltable', default=False, help='whether or not the asset is backed by another asset')
+    parser_issuance.add_argument('--backing_asset', default=config.XCP, help='the asset which each new asset is backed by (default: {})'.format(config.XCP))
+    parser_issuance.add_argument('--backing', default=0, help='how much of backing_asset each asset is backed by')
+
+    parser_melt = subparsers.add_parser('melt', help='melt(burn) an existing asset to retreive the asset stored within')
+    parser_issuance.add_argument('--asset', required=True, help='the name of the asset to be melted (if it’s available)')
+    parser_melt.add_argument('--quantity', default=0, help='the quantity of ASSET to be melted(burned)')
+    parser_melt.add_argument('--fee', help='the exact {} fee to be paid to miners'.format(config.BTC))
 
     parser_broadcast = subparsers.add_parser('broadcast', help='broadcast textual and numerical information to the network')
     parser_broadcast.add_argument('--source', required=True, help='the source address')
