@@ -47,6 +47,9 @@ def print_balances(balances):
     print(os.linesep.join(lines))
 
 def print_asset(asset):
+    backvalue = asset['backing']
+    if util.is_divisible(asset['backing_asset']) and bool(asset['meltable']):
+        backvalue = asset['backing']/100000000
     lines = []
     lines.append('')
     lines.append('Asset Details')
@@ -55,8 +58,8 @@ def print_asset(asset):
     table.add_row(['Asset ID:', asset['asset_id']])
     table.add_row(['Divisible:', asset['divisible']])
     table.add_row(['Meltable:', asset['meltable']])
-    table.add_row(['Backing_asset:', asset['backing_asset']])
-    table.add_row(['Backing:', asset['backing']])
+    table.add_row(['Backing Asset:', asset['backing_asset']])
+    table.add_row(['Backing per Asset:', backvalue])
     table.add_row(['Locked:', asset['locked']])
     table.add_row(['Supply:', asset['supply']])
     table.add_row(['Issuer:', asset['issuer']])

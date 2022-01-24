@@ -175,6 +175,7 @@ def prepare_args(args, action):
     # issuance
     if action == 'issuance':
         args.quantity = util.value_in(args.quantity, None, divisible=args.divisible)
+        args.backing = util.value_in(args.backing, args.backing_asset, None)
 
     # broadcast
     if action == 'broadcast':

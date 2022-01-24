@@ -125,7 +125,7 @@ def get_asset_backing(asset):
         issuance = api('sql', {'query': sql, 'bindings': bindings})
 
         if not issuance: raise AssetError('No such asset: {}'.format(asset))
-        return issuance[0]['backing']
+        return issuance[0]['backing_asset']
 
 def get_asset_backing_qty(asset):
     if asset in (config.BTC, config.XCP):
@@ -136,7 +136,7 @@ def get_asset_backing_qty(asset):
         issuance = api('sql', {'query': sql, 'bindings': bindings})
 
         if not issuance: raise AssetError('No such asset: {}'.format(asset))
-        return issuance[0]['backing_asset']
+        return issuance[0]['backing']
 
 def value_in(quantity, asset, divisible=None):
     if divisible is None:
