@@ -47,9 +47,17 @@ def print_balances(balances):
     print(os.linesep.join(lines))
 
 def print_asset(asset):
-    backvalue = asset['backing']
-    if util.is_divisible(asset['backing_asset']) and bool(asset['meltable']):
-        backvalue = asset['backing']/100000000
+    if asset['asset'] == 'XUP' or asset['asset'] == 'UNO':
+        meltable = False
+        backvalue = 0
+        backing_asset = 'None'
+    else:
+        backvalue = asset['backing']
+        backing_asset = asset['backing_asset']
+        meltable = asset['meltable']
+        if util.is_divisible(asset['backing_asset']) and bool(asset['meltable']):
+            backvalue = asset['backing']/100000000
+
     lines = []
     lines.append('')
     lines.append('Asset Details')
@@ -57,8 +65,8 @@ def print_asset(asset):
     table.add_row(['Asset Name:', asset['asset']])
     table.add_row(['Asset ID:', asset['asset_id']])
     table.add_row(['Divisible:', asset['divisible']])
-    table.add_row(['Meltable:', asset['meltable']])
-    table.add_row(['Backing Asset:', asset['backing_asset']])
+    table.add_row(['Meltable:', meltable])
+    table.add_row(['Backing Asset:', backing_asset])
     table.add_row(['Backing per Asset:', backvalue])
     table.add_row(['Locked:', asset['locked']])
     table.add_row(['Supply:', asset['supply']])
@@ -76,13 +84,14 @@ def print_asset(asset):
             table.add_row([address, balance])
         lines.append(table.get_string())
 
-    if asset['sends']:
-        lines.append('')
-        lines.append('Wallet Sends and Receives')
-        table = PrettyTable(['Type', 'Quantity', 'Source', 'Destination'])
-        for send in asset['sends']:
-            table.add_row([send['type'], send['quantity'], send['source'], send['destination']])
-        lines.append(table.get_string())
+    if asset['asset'] != 'UNO':
+        if asset['sends']:
+            lines.append('')
+            lines.append('Wallet Sends and Receives')
+            table = PrettyTable(['Type', 'Quantity', 'Source', 'Destination'])
+            for send in asset['sends']:
+                table.add_row([send['type'], send['quantity'], send['source'], send['destination']])
+            lines.append(table.get_string())
 
     lines.append('')
     print(os.linesep.join(lines))

@@ -194,7 +194,7 @@ def prepare_args(args, action):
 
     # melt
     if action == 'melt':
-        args.quantity = util.value_in(args.quantity, util.get_asset_backing(args.asset))
+        args.quantity = util.value_in(args.quantity, args.asset, False)#util.get_asset_backing(args.asset))
 
     # dividend
     if action == 'dividend':
