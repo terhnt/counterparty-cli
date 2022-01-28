@@ -66,8 +66,9 @@ def print_asset(asset):
     table.add_row(['Asset ID:', asset['asset_id']])
     table.add_row(['Divisible:', asset['divisible']])
     table.add_row(['Meltable:', meltable])
-    table.add_row(['Backing Asset:', backing_asset])
-    table.add_row(['Backing per Asset:', backvalue])
+    if meltable:
+        table.add_row(['Backing Asset:', backing_asset])
+        table.add_row(['Backing per Asset:', backvalue])
     table.add_row(['Locked:', asset['locked']])
     table.add_row(['Supply:', asset['supply']])
     table.add_row(['Issuer:', asset['issuer']])
