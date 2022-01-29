@@ -1,6 +1,7 @@
 import os
 from prettytable import PrettyTable
 from unopartycli import wallet, util
+from unopartylib.lib import config
 
 # TODO: inelegant
 def get_view(view_name, args):
@@ -47,7 +48,7 @@ def print_balances(balances):
     print(os.linesep.join(lines))
 
 def print_asset(asset):
-    if asset['asset'] == 'XUP' or asset['asset'] == 'UNO':
+    if asset['asset'] == config.XCP or asset['asset'] == config.BTC:
         meltable = False
         backvalue = 0
         backing_asset = 'None'
@@ -85,13 +86,25 @@ def print_asset(asset):
             table.add_row([address, balance])
         lines.append(table.get_string())
 
-    if asset['asset'] != 'UNO':
+    if asset['asset'] != config.BTC:
         if asset['sends']:
             lines.append('')
             lines.append('Wallet Sends and Receives')
             table = PrettyTable(['Type', 'Quantity', 'Source', 'Destination'])
+            i = 0
             for send in asset['sends']:
-                table.add_row([send['type'], send['quantity'], send['source'], send['destination']])
+                if not ((send['source'] == config.UNSPENDSTORAGE) or (send['destination'] == config.UNSPENDSTORAGE)):
+                    i = i + 1
+                    table.add_row([send['type'], send['quantity'], send['source'], send['destination']])
+            if i == 0:
+                lines.append('none')
+                lines.append('')
+            lines.append('Assets Stored and Melts')
+            for send in asset['sends']:
+                if send['source'] == config.UNSPENDSTORAGE:
+                    table.add_row(['redeemed', send['quantity'], send['source'], send['destination']])
+                if send['destination'] == config.UNSPENDSTORAGE:
+                    table.add_row(['stored', send['quantity'], send['source'], send['destination']])
             lines.append(table.get_string())
 
     lines.append('')
