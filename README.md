@@ -1,4 +1,4 @@
-Conversion to Unoparty-cli
+Conversion to Unoparty-cli ( This branch has Melt protocol implemented )
 is work in progress
 
 changes needed ( and probably more )

@@ -20,9 +20,10 @@ MESSAGE_PARAMS = {
     'dispenser': ['source', 'asset', 'give_quantity', 'mainchainrate', 'escrow_quantity', 'status', 'open_address'],
     'order': ['source', 'give_asset', 'give_quantity', 'get_asset', 'get_quantity', 'expiration', 'fee_required', 'fee_provided'],
     'btcpay': ['source', 'order_match_id'],
-    'issuance': ['source', 'asset', 'quantity', 'divisible', 'description', 'transfer_destination'],
+    'issuance': ['source', 'asset', 'quantity', 'divisible', 'description', 'transfer_destination', 'meltable', 'backing', 'backing_asset'],
     'broadcast': ['source', 'fee_fraction', 'text', 'timestamp', 'value'],
     'bet': ['source', 'feed_address', 'bet_type','deadline', 'wager_quantity', 'counterwager_quantity', 'expiration', 'target_value', 'leverage'],
+    'melt': ['source', 'asset', 'quantity'],
     'dividend': ['source', 'quantity_per_unit', 'asset', 'dividend_asset'],
     'burn': ['source', 'quantity'],
     'cancel': ['source', 'offer_hash'],
@@ -174,6 +175,7 @@ def prepare_args(args, action):
     # issuance
     if action == 'issuance':
         args.quantity = util.value_in(args.quantity, None, divisible=args.divisible)
+        args.backing = util.value_in(args.backing, args.backing_asset, None)
 
     # broadcast
     if action == 'broadcast':
@@ -189,6 +191,10 @@ def prepare_args(args, action):
         args.target_value = util.value_in(args.target_value, 'value')
         args.leverage = util.value_in(args.leverage, 'leverage')
         args.bet_type = BET_TYPE_ID[args.bet_type]
+
+    # melt
+    if action == 'melt':
+        args.quantity = util.value_in(args.quantity, args.asset, False)#util.get_asset_backing(args.asset))
 
     # dividend
     if action == 'dividend':

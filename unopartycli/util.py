@@ -105,6 +105,39 @@ def is_divisible(asset):
         if not issuances: raise AssetError('No such asset: {}'.format(asset))
         return issuances[0]['divisible']
 
+def is_meltable(asset):
+    if asset in (config.BTC, config.XCP):
+        return False
+    else:
+        sql = '''SELECT * FROM issuances WHERE (status = ? AND asset = ?)'''
+        bindings = ['valid', asset]
+        melts = api('sql', {'query': sql, 'bindings': bindings})
+
+        if not melts: raise AssetError('No such asset: {}'.format(asset))
+        return melts[0]['meltable']
+
+def get_asset_backing(asset):
+    if asset in (config.BTC, config.XCP):
+        return None
+    else:
+        sql = '''SELECT * FROM issuances WHERE (status = ? AND asset = ?)'''
+        bindings = ['valid', asset]
+        issuance = api('sql', {'query': sql, 'bindings': bindings})
+
+        if not issuance: raise AssetError('No such asset: {}'.format(asset))
+        return issuance[0]['backing_asset']
+
+def get_asset_backing_qty(asset):
+    if asset in (config.BTC, config.XCP):
+        return 0
+    else:
+        sql = '''SELECT * FROM issuances WHERE (status = ? AND asset = ?)'''
+        bindings = ['valid', asset]
+        issuance = api('sql', {'query': sql, 'bindings': bindings})
+
+        if not issuance: raise AssetError('No such asset: {}'.format(asset))
+        return issuance[0]['backing']
+
 def value_in(quantity, asset, divisible=None):
     if divisible is None:
         divisible = is_divisible(asset)

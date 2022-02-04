@@ -158,6 +158,7 @@ def initialize(testnet=False, testcoin=False, regtest=True, customnet="",
             config.BURN_START = config.BURN_START_TESTNET_TESTCOIN
             config.BURN_END = config.BURN_END_TESTNET_TESTCOIN
             config.UNSPENDABLE = config.UNSPENDABLE_TESTNET
+            config.UNSPENDSTORAGE = config.UNSPENDSTORAGE_TESTNET
         else:
             config.ADDRESSVERSION = config.ADDRESSVERSION_TESTNET
             config.P2SH_ADDRESSVERSION = config.P2SH_ADDRESSVERSION_TESTNET
@@ -165,6 +166,7 @@ def initialize(testnet=False, testcoin=False, regtest=True, customnet="",
             config.BURN_START = config.BURN_START_TESTNET
             config.BURN_END = config.BURN_END_TESTNET
             config.UNSPENDABLE = config.UNSPENDABLE_TESTNET
+            config.UNSPENDSTORAGE = config.UNSPENDSTORAGE_TESTNET
     elif config.CUSTOMNET:
         custom_args = customnet.split('|')
 
@@ -187,6 +189,7 @@ def initialize(testnet=False, testcoin=False, regtest=True, customnet="",
             config.BURN_START = config.BURN_START_REGTEST_TESTCOIN
             config.BURN_END = config.BURN_END_REGTEST_TESTCOIN
             config.UNSPENDABLE = config.UNSPENDABLE_REGTEST
+            config.UNSPENDSTORAGE = config.UNSPENDSTORAGE_REGTEST
         else:
             config.ADDRESSVERSION = config.ADDRESSVERSION_REGTEST
             config.P2SH_ADDRESSVERSION = config.P2SH_ADDRESSVERSION_REGTEST
@@ -194,6 +197,7 @@ def initialize(testnet=False, testcoin=False, regtest=True, customnet="",
             config.BURN_START = config.BURN_START_REGTEST
             config.BURN_END = config.BURN_END_REGTEST
             config.UNSPENDABLE = config.UNSPENDABLE_REGTEST
+            config.UNSPENDSTORAGE = config.UNSPENDSTORAGE_REGTEST
     else:
         config.MAGIC_BYTES = config.MAGIC_BYTES_MAINNET
         if config.TESTCOIN:
@@ -203,6 +207,7 @@ def initialize(testnet=False, testcoin=False, regtest=True, customnet="",
             config.BURN_START = config.BURN_START_MAINNET_TESTCOIN
             config.BURN_END = config.BURN_END_MAINNET_TESTCOIN
             config.UNSPENDABLE = config.UNSPENDABLE_MAINNET
+            config.UNSPENDSTORAGE = config.UNSPENDSTORAGE_MAINNET
         else:
             config.ADDRESSVERSION = config.ADDRESSVERSION_MAINNET
             config.P2SH_ADDRESSVERSION = config.P2SH_ADDRESSVERSION_MAINNET
@@ -210,6 +215,7 @@ def initialize(testnet=False, testcoin=False, regtest=True, customnet="",
             config.BURN_START = config.BURN_START_MAINNET
             config.BURN_END = config.BURN_END_MAINNET
             config.UNSPENDABLE = config.UNSPENDABLE_MAINNET
+            config.UNSPENDSTORAGE = config.UNSPENDSTORAGE_MAINNET
 
 WALLET_METHODS = [
     'get_wallet_addresses', 'get_btc_balances', 'sign_raw_transaction',

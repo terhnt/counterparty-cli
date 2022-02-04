@@ -23,7 +23,7 @@ class LockedWalletError(WalletError):
     pass
 
 def WALLET():
-    return sys.modules['unopartycli.wallet.{}'.format(config.WALLET_NAME)] 
+    return sys.modules['unopartycli.wallet.{}'.format(config.WALLET_NAME)]
 
 def get_wallet_addresses():
     return WALLET().get_wallet_addresses()
@@ -135,10 +135,10 @@ def asset(asset_name):
         })
     else:
         issuances = api('get_issuances', {
-            'filters': [('asset', '==', asset_name),], 
-            'status': 'valid', 
-            'order_by': 'tx_index', 
-            'order_dir': 'DESC', 
+            'filters': [('asset', '==', asset_name),],
+            'status': 'valid',
+            'order_by': 'tx_index',
+            'order_dir': 'DESC',
         })
         if not issuances:
             raise WalletError('Asset not found')
@@ -150,6 +150,9 @@ def asset(asset_name):
         asset_info.update({
             'owner': issuance['issuer'],
             'divisible': bool(issuance['divisible']),
+            'meltable': bool(issuance['meltable']),
+            'backing': issuance['backing'],
+            'backing_asset': issuance['backing_asset'],
             'locked': locked,
             'description': issuance['description'],
             'issuer': issuance['issuer']
